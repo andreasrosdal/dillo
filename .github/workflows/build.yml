@@ -269,3 +269,32 @@ jobs:
         make
         make check
         ls -l src/dillo
+
+
+  build-windows-msvc:
+    needs: ubuntu-latest-html-tests
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Configure
+        shell: cmd
+        run: |
+          mkdir build
+          cd build
+          cmake .. -G "Visual Studio 16 2019" -A x64 -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        shell: cmd
+        run: |
+          cd build
+          cmake --build . --config Release
+
+      - name: Test
+        shell: cmd
+        run: |
+          cd build
+          ctest -C Release
