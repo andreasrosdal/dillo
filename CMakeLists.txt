@@ -46,12 +46,12 @@ add_executable(Dillo
     ${DPID_SOURCES}
 )
 
-# Link libraries if there are any, e.g., FLTK, OpenSSL, etc.
-# target_link_libraries(Dillo PRIVATE fltk)
-
 # Compiler options
-target_compile_options(Dillo PRIVATE -Wall -Wextra)
+if(MSVC)
+    target_compile_options(Dillo PRIVATE /W4)
+else()
+    target_compile_options(Dillo PRIVATE -Wall -Wextra)
+endif()
 
 # Installation rules
 install(TARGETS Dillo RUNTIME DESTINATION bin)
-
