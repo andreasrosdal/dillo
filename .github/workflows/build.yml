@@ -272,8 +272,9 @@ jobs:
 
 
   windows-mscv:
-     runs-on: windows-latest
-     steps:
+    needs: ubuntu-latest-html-tests  
+    runs-on: windows-latest
+    steps:
        - uses: actions/checkout@v2
  
        - name: Setup MSVC
