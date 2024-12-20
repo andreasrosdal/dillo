@@ -271,20 +271,20 @@ jobs:
         ls -l src/dillo
 
 
-  windows-mscv:
+  windows-msvc:
     needs: ubuntu-latest-html-tests  
     runs-on: windows-latest
     steps:
-       - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
  
-       - name: Setup MSVC
-         uses: ilammy/msvc-dev-cmd@v1
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
  
-       - name: Configure CMake
-         run: cmake -S . -B build -DCMAKE_GENERATOR_PLATFORM=x64
+      - name: Configure CMake
+        run: cmake -S . -B build -DCMAKE_GENERATOR_PLATFORM=x64
  
-       - name: Build
-         run: cmake --build build
+      - name: Build
+        run: cmake --build build
  
-       - name: Test
+      - name: Test
         run: cd build && ctest
